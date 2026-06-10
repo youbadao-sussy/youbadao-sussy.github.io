@@ -23,7 +23,7 @@ jobs:
       - run: pip install zensical
       - run: |
             cp index.md docs/
-            zensical build --clean
+            zensical serve --clean
       - uses: actions/upload-pages-artifact@v5
         with:
           path: site
