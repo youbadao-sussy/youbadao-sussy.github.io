@@ -1,31 +1,34 @@
-name: Documentation
+name: Deploy Zensical to GitHub Pages
 on:
-  push:
-    branches:
-      - master
-      - main
+    push:
+        branches: main
+        paths: 
+            - zensical.toml
+            - docs/**
+    workflow_dispatch:
 permissions:
   contents: read
   pages: write
   id-token: write
 jobs:
   deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/configure-pages@v6
-      - uses: actions/checkout@v6
-      - uses: actions/setup-python@v6
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
         with:
-          python-version: 3.x
+          python-version: "3.x"
+
+      - name: Configure Git
+        run: |
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git fetch origin gh-pages
+          
       - run: pip install zensical
-      - run: |
-            cp index.md docs/
-            zensical serve --clean
-      - uses: actions/upload-pages-artifact@v5
+      - name: Deploy HTML files
+        run: python3 -m zensical gh-deploy
+      - uses: peaceiris/actions-gh-pages@v3
         with:
-          path: site
-      - uses: actions/deploy-pages@v5
-        id: deployment
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./site
