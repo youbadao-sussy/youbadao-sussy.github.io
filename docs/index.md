@@ -22,7 +22,7 @@ icon: lucide/rocket
 ## My Directing Projects
 ??? warning "!!協力者・従業員募集中!! - 表示するにはクリックしてください。"
     ??? info "ECPTindies従業員 - オリジナルゲーム"
-        * プログラマー(0/2) - Haxe/Limeでの描画関係の構築ができる人
+        * プログラマー(0/2) - Haxe・LimeでのVulkan描画関係の構築ができる人。
         * 作曲者(0/2) - 余裕がある、または作曲に意欲的な人。
         * 3DCGアーティスト(0/2) - 4等身モデルを作成できる人。
 
